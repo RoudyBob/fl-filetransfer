@@ -1,0 +1,19 @@
+https://cloud.google.com/functions/docs/tutorials/storage
+
+Deploy a function with object finalize trigger:
+gcloud functions deploy hello_gcs_generic --runtime python37 --trigger-resource YOUR_TRIGGER_BUCKET_NAME --trigger-event google.storage.object.finalize
+
+Deploy a function with object delete trigger:
+NOTE: Versioning must be off on the bucket - gsutil versioning set off gs://YOUR_TRIGGER_BUCKET_NAME
+gcloud functions deploy hello_gcs_generic --runtime python37 --trigger-resource YOUR_TRIGGER_BUCKET_NAME --trigger-event google.storage.object.delete
+
+Deploy a function with object archive trigger:
+NOTE: Versioning must be on on the bucket - gsutil versioning set on gs://YOUR_TRIGGER_BUCKET_NAME
+gcloud functions deploy hello_gcs_generic --runtime python37 --trigger-resource YOUR_TRIGGER_BUCKET_NAME --trigger-event google.storage.object.archive
+
+Deploy a function with object metadata update trigger:
+NOTE: Versioning must be off on the bucket - gsutil versioning set off gs://YOUR_TRIGGER_BUCKET_NAME
+gcloud functions deploy hello_gcs_generic --runtime python37 --trigger-resource YOUR_TRIGGER_BUCKET_NAME --trigger-event google.storage.object.metadataUpdate
+Update the metadata: gsutil -m setmeta -h "Content-Type:text/plain" gs://YOUR_TRIGGER_BUCKET_NAME/gcf-test.txt
+
+
